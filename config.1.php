@@ -16,7 +16,7 @@ curl_setopt($ch, CURLOPT_HTTPHEADER, array( //add desired headers to the request
     'user-key: '.$apikey,
     'Accept: application/json'
 ));
-$file_contents = curl_exec ( $ch ); // excute the request we will get our response on $file_contents
+$file_contents = curl_exec ( $ch ); // execute the request we will get our response on $file_contents
 if (curl_errno ( $ch )) {
     echo curl_error ( $ch );
     curl_close ( $ch );
@@ -25,12 +25,12 @@ if (curl_errno ( $ch )) {
 curl_close ( $ch ); // destroy curl object
 
 // dump output of api
-$game = json_decode($file_contents); // Game array contains all game or set of games data
+$game = json_decode($file_contents, true); // Game array contains all game or set of games data
 //print_r($game); // let's have a look on the array
-$screenshoots = $game[0][37]; // initiate empty array to put all screen shoot into it.
-print_r($game[0][37]);
-$single_screen = array(); // initiate empty array to put all screen shoot into it.
-//foreach($screenshoots as $single_screen)
- //  $id[] = $single_screen['cloudinary_id'];
-//print_r($single_screen);
+$screenshots = $game[0]['screenshots'];
+
+foreach ($screenshots as $subarraykey) {
+
+    echo $subarraykey['cloudinary_id'];
+}
 ?>
