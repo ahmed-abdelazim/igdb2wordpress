@@ -1,36 +1,19 @@
 <?php
-$host = "http://api-endpoint.igdb.com/"; // main api host
-$apikey = "4988c731520d39390dc4194e6534ae93"; // the api key
-if (! function_exists ( 'curl_version' )) { // check curl
-    exit ( "Enable cURL in PHP" );
-}
-// let's prepare grabing data from api
-$ch = curl_init (); // initiat curl object
-$timeout = 0; // 100; // set to zero for no timeout
-$myHITurl = "http://api-endpoint.igdb.com/games/1942?fields=*"; // api request url
-curl_setopt ( $ch, CURLOPT_URL, $myHITurl );
-curl_setopt ( $ch, CURLOPT_HEADER, 0 );
-curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, 1 );
-curl_setopt ( $ch, CURLOPT_CONNECTTIMEOUT, $timeout );
-curl_setopt($ch, CURLOPT_HTTPHEADER, array( //add desired headers to the request
-    'user-key: '.$apikey,
-    'Accept: application/json'
-));
-$file_contents = curl_exec ( $ch ); // execute the request we will get our response on $file_contents
-if (curl_errno ( $ch )) {
-    echo curl_error ( $ch );
-    curl_close ( $ch );
-    exit ();
-}
-curl_close ( $ch ); // destroy curl object
+include("config.php");
+include("functions.php");
+$game=get_response ("games","1942");
 
-// dump output of api
-$game = json_decode($file_contents, true); // Game array contains all game or set of games data
 //print_r($game); // let's have a look on the array
 $screenshots = $game[0]['screenshots'];
+$developer = get_response ("companies","1");
+
+echo $game[0]['name'].'<br>';
+echo "Release date: ".date("Y-m-d", substr($game[0]['release_dates'][0]['date'], 0, 10)).'<br>';
+echo $developer[0]['name'].'<br>';
 
 foreach ($screenshots as $subarraykey) {
 
-    echo $subarraykey['cloudinary_id'];
+    echo '<img src="https://images.igdb.com/igdb/image/upload/t_screenshot_med/'.$subarraykey['cloudinary_id'].'.jpg"><br>';
+    // all images sizes are here https://igdb.github.io/api/references/images/
 }
 ?>
