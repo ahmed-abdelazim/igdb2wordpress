@@ -32,6 +32,7 @@ function get_response ($endpoint,$query) {
     unset($url);
     $game = json_decode($file_contents, true);
     return $game;
+
 }
 function get_game($id){
     $aggregated_rating=$response[aggregated_rating];

@@ -103,13 +103,5 @@ echo $screenshots_html;
 echo '<h2>Videos: </h2><br>';
 
 echo $video_html;
-$i = 1;
-$pquery = '';
-while ($i=400){
 
-    $pquery .= ','.$i;
-    $i++;
-}
-echo $pquery;
-get_response ('platforms',$pquery);
 ?>
