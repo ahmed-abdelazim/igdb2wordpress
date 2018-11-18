@@ -9,8 +9,12 @@ function get_response ($endpoint,$query) {
     // let's prepare grabing data from api
     $ch = curl_init (); // initiat curl object
     $timeout = 0; // 100; // set to zero for no timeout
-    $myHITurl = $host.$endpoint."/".$query; // api request url
-    curl_setopt ( $ch, CURLOPT_URL, $myHITurl );
+     // api request url
+    
+    $url = $host.$endpoint.'/'.$query;
+    
+    curl_setopt ( $ch, CURLOPT_URL, $url);
+    
     curl_setopt ( $ch, CURLOPT_HEADER, 0 );
     curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, 1 );
     curl_setopt ( $ch, CURLOPT_CONNECTTIMEOUT, $timeout );
@@ -18,13 +22,14 @@ function get_response ($endpoint,$query) {
         'user-key: '.$apikey,
         'Accept: application/json'
     ));
-    $file_contents = curl_exec ( $ch ); // execute the request we will get our response on $file_contents
+        $file_contents = curl_exec ( $ch ); // execute the request we will get our response on $file_contents
     if (curl_errno ( $ch )) {
         echo curl_error ( $ch );
         curl_close ( $ch );
         exit ();
     }
     curl_close ( $ch ); // destroy curl object
+    unset($url);
     $game = json_decode($file_contents, true);
     return $game;
 }
