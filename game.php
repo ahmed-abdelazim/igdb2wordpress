@@ -2,7 +2,11 @@
 include("config.php");
 include("arrays.php");
 include("functions.php");
-$game=get_response ("games",$_GET['gid']);
+//$game_raw = file_get_contents('ps4_games_full.txt','r');
+$game = json_decode(file_get_contents('games-formed.txt','r'));
+echo '<pre>'.print_r($game).'</pre>';
+//print_r($game_raw);
+//$game=get_response ("games",$_GET['gid']);
 if (isset($game[0]['name'])){ // if statement to avoid generating errors in case of bad game id or bad response from server
 $genres_id = $game[0]['genres']; // genres ID's array
 $platforms_id = $game[0]['platforms']; // platforms ID's array
