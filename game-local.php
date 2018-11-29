@@ -3,8 +3,8 @@ include("config.php");
 include("arrays.php");
 include("functions.php");
 //$game_raw = file_get_contents('ps4_games_full.txt','r');
-$game = json_decode(file_get_contents('games-formed.txt','r'));
-echo '<pre>'.print_r($game).'</pre>';
+$game = json_decode(file_get_contents('games-formed.txt','r'),true);
+//echo '<pre>'.print_r($game).'</pre>';
 //print_r($game_raw);
 //$game=get_response ("games",$_GET['gid']);
 if (isset($game[0]['name'])){ // if statement to avoid generating errors in case of bad game id or bad response from server
@@ -30,8 +30,8 @@ if(array_key_exists('developers', $game[0])){
     $company_html = "";
     $developers_id = $game[0]['developers'];
     foreach ($developers_id as $value) { // print companies
-       $key = array_search($value,$developers,true);
-        $company_html .= $developers[$key]['name'].'<br />';
+        $developers=get_response ('companies', $value.'?fields=name');
+        $company_html .= $developers[0]['name'].'<br />';
 
     }
 
@@ -45,8 +45,8 @@ if(array_key_exists('publishers', $game[0])){
     $publishers_html = "";
     $publishers_id = $game[0]['publishers'];
     foreach ($publishers_id as $value) { // print companies
-        $key = array_search($value,$developers,true);
-        $publishers_html .= $publishers[$key]['name'].'<br />';
+        $publishers=get_response ('companies', $value.'?fields=name');
+        $publishers_html .= $publishers[0]['name'].'<br />';
 
     }
 
