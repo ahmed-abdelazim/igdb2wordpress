@@ -4,7 +4,8 @@ include("config.php");
 include("arrays.php");
 include("functions.php");
 $ps4Query = '';
-$ps4ids = $games_ids_array[0]['games'];
+//$ps4ids = $games_ids_array[0]['games'];
+$ps4ids = $game_array_uniqe;
 $ps4Qarray = array(); // declear an array to store queries which must be less than 1900 chars.
 foreach ($ps4ids as $gid){
     $ps4Query .= $gid.',';

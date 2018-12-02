@@ -3,7 +3,7 @@
 //header('Content-Type: application/json');
 include("config.php");
 include("functions.php");
-$game = json_decode(file_get_contents('games-formed.txt','r'), 'r');
+$game = json_decode(file_get_contents('games.txt','r'), 'r');
 $genres_ids_array = array();
 $ps4Query = '';
 foreach ($game as $key => $val){

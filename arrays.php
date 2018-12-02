@@ -1231,9 +1231,9 @@ for ($x = 0; $x <= 7; $x++) {
 	}
 } 
 
-echo count ($game_array_merged, true);
+//echo count ($game_array_merged, true);
 echo "<br><br>";
 $game_array_uniqe = array_unique ($game_array_merged);
-echo count ($game_array_uniqe, true);
+//echo count ($game_array_uniqe, true);
 //print_r($game_array_merged);
 //echo json_encode($game_array_merged, true);

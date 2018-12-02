@@ -96,11 +96,17 @@ function get_inner_ids($file,$path){ //to get ids in inner array of a game eleme
         $genres_ids_array_uniuqe = array_unique($genres_ids_array);
         return $genres_ids_array_uniuqe;
 }
-function get_platforms($id){}
-function get_release_dates($id){}
-function get_screenshote($id){}
-function get_artwork($id){} //cover
-function get_videos($id){}
-function get_websites($id){} // like twitter or instagram
-function get_aggregated_rating($response){}
+
+
+
+function return_name($id,$file){
+
+    $element_array = json_decode(file_get_contents($file,'r'), true);
+    $key = array_search($id, array_column($element_array, 'id'));
+    $element_array_c = array_column($element_array, 'name');
+    return $element_array_c[$key];
+}
+
+
+
 ?>
