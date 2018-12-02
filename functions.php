@@ -77,7 +77,25 @@ function get_game($id){
 function get_developer($id){
 
 }
-function get_gener($id){}
+
+
+function get_inner_ids($file,$path){ //to get ids in inner array of a game element in response
+
+        $game = json_decode(file_get_contents($file,'r'), 'r');
+        $genres_ids_array = array();
+        $ps4Query = '';
+            foreach ($game as $key => $val){
+                if (array_key_exists($path,$game[$key])){$genres_inner = $game[$key][$path];}
+                if (is_array($genres_inner) || is_object($genres_inner)){
+                        foreach ($genres_inner as $val1) {
+                        array_push($genres_ids_array,$val1);
+                        }
+                }
+            }
+
+        $genres_ids_array_uniuqe = array_unique($genres_ids_array);
+        return $genres_ids_array_uniuqe;
+}
 function get_platforms($id){}
 function get_release_dates($id){}
 function get_screenshote($id){}

@@ -1219,3 +1219,21 @@ $platforms = json_decode($platforms_json, true);
 //echo count($games_ids_array[7], true).'-'; // 801
 //print_r($games_ids_array);
 //echo $games_json;
+$ps_platforms = array('48','165','7','8','9','38','45','46');
+$game_array_merged = array();
+for ($x = 0; $x <= 7; $x++) {
+	$sub = $ps_platforms[$x];
+	$gids = $games_ids_array[$x]['games'];
+	//print_r($gids);
+	foreach($gids as $val2){
+
+		array_push ($game_array_merged,$val2);
+	}
+} 
+
+echo count ($game_array_merged, true);
+echo "<br><br>";
+$game_array_uniqe = array_unique ($game_array_merged);
+echo count ($game_array_uniqe, true);
+//print_r($game_array_merged);
+//echo json_encode($game_array_merged, true);
