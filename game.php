@@ -1,4 +1,6 @@
 <?php
+ini_set('display_errors', 0);
+error_reporting(E_ERROR | E_WARNING | E_PARSE);
 include("config.php");
 include("arrays.php");
 include("functions.php");
@@ -8,8 +10,8 @@ $game = json_decode(file_get_contents('games.txt','r'), true);
 //echo '<pre>'.print_r($game).'</pre>';
 //print_r($game_raw);
 $gkey = $_GET['gkey'];
-if (isset($game[$gkey]['name'])){ // if statement to avoid generating errors in case of bad game id or bad response from server
-$genres_id = $game[$gkey]['genres']; // genres ID's array
+if (isset($game[$gkey]['name']) &&  isset($game[$gkey]['cover'])){ // if statement to avoid generating errors in case of bad game id or bad response from server
+    if (array_key_exists('genres',$game[$gkey])){ $genres_id = $game[$gkey]['genres'];} // genres ID's array
 $platforms_id = $game[$gkey]['platforms']; // platforms ID's array
 
 // ======== Screen shots html ======== 
